@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --paper: #fffdf7;
+  --paper2: #fff7e6;
+  --ink: #15121c;
+  --ink-soft: #3f334f;
+  --line: rgba(21, 18, 28, 0.14);
+  --marker-yellow: rgba(246, 216, 75, 0.55);
+  --marker-teal: rgba(45, 183, 163, 0.24);
+  --marker-coral: rgba(255, 107, 107, 0.22);
+  --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background:
+    linear-gradient(180deg, rgba(255, 247, 230, 0.82), rgba(255, 253, 247, 0.92)),
+    var(--noise);
+  background-blend-mode: multiply;
+}
+
+/* Notebook paper layer */
+.paper {
+  background:
+    linear-gradient(transparent 31px, rgba(21, 18, 28, 0.06) 32px),
+    linear-gradient(90deg, rgba(255, 107, 107, 0.16) 0 1px, transparent 1px),
+    radial-gradient(1200px 600px at 30% 10%, rgba(246, 216, 75, 0.22), transparent 60%),
+    linear-gradient(180deg, var(--paper2), var(--paper));
+  background-size: 100% 32px, 100% 100%, 100% 100%, 100% 100%;
+  background-position: 0 0, 44px 0, 0 0, 0 0;
+}
+
+/* Slightly imperfect “hand-drawn” border */
+.sketch-border {
+  position: relative;
+  border-radius: 18px;
+}
+.sketch-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 20px;
+  border: 2px solid rgba(21, 18, 28, 0.22);
+  transform: rotate(-0.6deg);
+  pointer-events: none;
+}
+.sketch-border::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  border: 1.5px solid rgba(21, 18, 28, 0.14);
+  transform: rotate(0.35deg);
+  pointer-events: none;
+}
+
+/* Marker-swipe hover */
+.marker-hover {
+  position: relative;
+  isolation: isolate;
+}
+.marker-hover::before {
+  content: '';
+  position: absolute;
+  inset: 55% -6px -6px -6px;
+  background: var(--marker-yellow);
+  transform: skewX(-8deg) rotate(-1.2deg) scaleX(0);
+  transform-origin: left;
+  border-radius: 14px;
+  filter: blur(0.2px);
+  transition: transform 220ms ease;
+  z-index: -1;
+}
+.marker-hover:hover::before {
+  transform: skewX(-8deg) rotate(-1.2deg) scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marker-hover::before {
+    transition: none;
+  }
+}
