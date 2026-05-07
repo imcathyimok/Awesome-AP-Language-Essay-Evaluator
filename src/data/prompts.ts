@@ -50,25 +50,42 @@ export const PROMPTS: Prompt[] = [
         label: 'Source A',
         citation:
           "O’Callaghan, Jonathan. “What Is Space Junk and Why Is It a Problem?” Natural History Museum (London).",
-        excerpt: `Space junk, or space debris, is any piece of machinery or debris left by humans in space. It can
-refer to big objects such as dead satellites that have failed or been left in orbit at the end of
+        excerpt: `What is space junk?
+Space junk, or space debris, is any piece of machinery or debris left by humans in space.
+It can refer to big objects such as dead satellites that have failed or been left in orbit at the end of
 its mission. It can also refer to smaller things, like bits of debris or paint flecks that have
 fallen off a rocket.
 
+Some human-made junk has been left on the Moon, too.
+
+How much space junk is there?
 While there are about 2,000 active satellites orbiting Earth at the moment, there are also 3,000
 dead ones littering space. What’s more, there are around 34,000 pieces of space junk bigger than
 10 centimetres in size and millions of smaller pieces that could nonetheless prove disastrous if
 they hit something else.
 
-One major concern is that even tiny fragments can travel at extremely high speeds and cause
-catastrophic damage when they collide with satellites or spacecraft. The problem is likely to grow
-as more launches add more objects to orbit, increasing the chance of collisions and the amount of
-new debris those collisions create.`,
+How does space junk get into space?
+All space junk is the result of us launching objects from Earth, and it remains in orbit until it re-enters the atmosphere.
+
+Some objects in lower orbits of a few hundred kilometres can return quickly. They often re-enter the atmosphere after a few years and, for the most part, they’ll burn up—so they don’t reach the ground. But debris or satellites left at higher altitudes of 36,000 kilometres—where communications and weather satellites are often placed in geostationary orbits—can continue to circle Earth for hundreds or even thousands of years.
+
+Some space junk results from collisions or anti-satellite tests in orbit. When two satellites collide, they can smash apart into thousands of new pieces, creating lots of new debris. This is rare, but several countries including the USA, China and India have used missiles to practice blowing up their own satellites. This creates thousands of new pieces of dangerous debris.
+
+What risks does space junk pose to space exploration?
+Fortunately, at the moment, space junk doesn’t pose a huge risk to our exploration efforts. The biggest danger it poses is to other satellites in orbit.
+
+These satellites have to move out of the way of all this incoming space junk to make sure they don’t get hit and potentially damaged or destroyed.
+
+In total, across all satellites, hundreds of collision avoidance maneuvers are performed every year, including by the International Space Station (ISS), where astronauts live.
+
+Fortunately, collisions are rare: a Chinese satellite broke up in March 2021 after a collision. Before that, the last satellite to collide and be destroyed by space junk was in 2009. And when it comes to exploring beyond Earth’s orbit, none of the limited amount of space junk out there poses a problem.
+
+Fortunately, collisions are rare: a Chinese satellite broke up in March 2021 after a collision. Before that, the last satellite to collide and be destroyed by space junk was in 2009. And when it comes to exploring beyond Earth’s orbit, none of the limited amount of space junk out there poses a problem.`,
       },
       {
         label: 'Source B',
         citation: "“ESA’s Space Environment Report 2021.” European Space Agency.",
-        excerpt: 'Graph: “Satellites Launched into Low-Earth Orbit” (classified by main source of funding).',
+        excerpt: 'Graph: “Satellites Launched into Low-Earth Orbit” (classified by main source of funding). The graph shows a steep increase in launches over time, with commercial launches growing especially quickly.',
         note: 'Screenshot from the PDF page is shown below.',
         imageUrl: '/source-images/ap25-frq-english-language-set-1-page5.png',
         imageAlt: 'Source B graph from the AP 2025 Set 1 PDF',
@@ -107,17 +124,39 @@ Despite the growing problem, the ESA’s chief strategy officer is optimistic. U
         label: 'Source D',
         citation:
           'Rossettini, Luca. “Space Debris: Prevention, Remediation or Mitigation?” SpaceNews (2015).',
-        excerpt: `Effort and money are being spent today on the development of ADR missions, a remediation technique focused on eliminating the garbage that is already in space. … There are political and legal issues related to the ownership of defunct satellites … There are also technology development challenges … Finally, there is the cost of every single mission that will be paid by taxpayers. …
+        excerpt: `What is the best strategy to stop the increasing concentration of junk around the planet?
 
-We should first make sure that every new satellite and launch vehicle is properly and effectively removed at the end of life. Then we can start removing the defunct satellites already in space. Finally, we may think about recycling and reusing spent satellites already in space. Therefore, prevention is the first action to be put in place …`,
+Passive and active devices can be installed on satellites to remove them at the end of their missions. Some envision an active debris removal (ADR) mission to go grab a dead satellite and remove it. There are even studies for refurbishing missions, where a robotic space vehicle would grab a satellite nearing its end of life to refuel and service it. Nearly all of these plans are real only on paper.
+
+Effort and money are being spent today on the development of ADR missions, a remediation technique focused on eliminating the garbage that is already in space. These technologies, once developed, will permit spacecraft to grab large or small satellites and remove them from orbit. Unfortunately there are still several criticalities to face. There are political and legal issues related to the ownership of defunct satellites that prevent, for example, a European ADR vehicle from disposing of an Indian satellite without permission. There are also technology development challenges, like the need to capture a noncooperating target. Finally, there is the cost of every single mission that will be paid by taxpayers. Moreover, according to some experts, we need to remove about 10 big satellites per year to significantly reduce the collision risk. With more than 100 satellites launched into space every year, pulling 10 down does not get us closer....
+
+Mitigation is the process of reducing the likelihood that a specific object will cause more debris. It involves passivation of rocket bodies and decommissioned spacecraft—venting pressure vessels and fuel tanks and discharging batteries to prevent explosions in space. These fundamental measures are quite well implemented in all the new satellites launched.
+
+But once more, mitigation measures by themselves don’t get us any closer still.
+
+In the end we can’t limit ourselves to “reducing,” “remediating” or “mitigating” if what we ultimately want is to operate in a clean space, where operators are not bothered by other threatening man-made objects approaching their assets.
+
+We should first make sure that every new satellite and launch vehicle is properly and effectively removed at the end of life. Then we can start removing the defunct satellites already in space. Finally, we may think about recycling and reusing spent satellites already in space. Therefore, prevention is the first action to be put in place, while we develop effective and efficient technologies for the ADR missions. Tethers, balloons, solar sails and active decommissioning devices are all examples of systems that can be installed on satellites before launch to increase the chances of being able to dispose of them at the end of life. Whatever is ready and available today is better than doing nothing. No more dead satellites such as DMSP-F13 should be left uncontrolled in orbit, representing a risk to operative satellites due to possible collisions and to the safe access to space of incoming missions.`,
       },
       {
         label: 'Source E',
         citation:
           'National Environmental Satellite, Data, and Information Service. “Does Space Junk Fall from the Sky?” NOAA (2018).',
-        excerpt: `Despite their size, even the smallest of objects … can be hazardous … because they are orbiting at extremely high velocities. …
+        excerpt: `Despite their size, even the smallest of objects, some of which cannot be detected by sensors, can be hazardous to unmanned and manned spacecraft. This is because they are orbiting at extremely high velocities. This is faster than a bullet, which means that the debris can easily punch through the protective covering on satellites or spacecraft.
 
-“Because Suomi NPP moves at a similar speed as the debris object, if there had been an impact, it would have occurred at a combined speed of nearly 35,000 mph. This would have been catastrophic not only to the satellite, but would result in thousands of pieces of new debris,” said Harry Solomon …`,
+While space debris is rarely a concern for humans on Earth, our satellites in the sky often have to avoid its dangerous path.
+
+For example, on an otherwise quiet Sunday in September 2014, the Suomi NPP mission team was monitoring the possible close approach of a debris object (which was determined to be between 4 inches and 3.3 feet in size range). By early evening, the risk was assessed to be high enough to start planning to maneuver the satellite into a safer zone.
+
+The team determined that the small space debris object was traveling at a rate of almost 17,000 mph directly towards Suomi NPP. They calculated that if no action was taken, it was likely to miss the satellite by just 300 feet on Tuesday, September 30. With that knowledge, the decision was made at 1:30 p.m. on Monday, September 29, for NOAA’s Satellite Operations Facility, or NSOF, in Suitland, Maryland, to reposition Suomi NPP.
+
+“Because Suomi NPP moves at a similar speed as the debris object, if there had been an impact, it would have occurred at a combined speed of nearly 35,000 mph. This would have been catastrophic not only to the satellite, but would result in thousands of pieces of new debris,” said Harry Solomon, Mission Manager for NOAA/NASA Suomi NPP.
+
+Since Suomi NPP’s launch in October 2011, it has successfully completed a few Risk Mitigation Maneuvers to avoid space debris!
+
+In a global effort to reduce space debris, many satellite mission teams are able to safely maneuver retired satellites back into Earth’s atmosphere so that one of two things occur. For satellites orbiting close to Earth, operators lower the orbit of a decommissioned satellite so that it will naturally re-enter the atmosphere within 25 years (known as the “25-year Rule”). As the satellite begins to fall back toward Earth and loses altitude, the compression and friction in the dense region of the atmosphere closest to the Earth generates a lot of heat which breaks up and burns most of the satellite machinery.
+
+Or, if the satellite has enough fuel, it can fly back through the atmosphere and be crashed into the ocean. This Pacific Ocean location has many names, Point Nemo (which is Latin for ‘no one’) and the Oceanic Pole of Inaccessibility. The nearest land mass is 1,450 nautical miles away.`,
       },
       {
         label: 'Source F',
@@ -184,26 +223,27 @@ Despite how involved in America’s business Indians have been, most people will
       {
         label: 'Source A',
         citation: 'Foderaro, Lisa W. “Navigation Apps Are Turning Quiet Neighborhoods Into Traffic Nightmares.” New York Times (2017).',
-        excerpt: 'Article excerpt about navigation apps, routing, and neighborhood traffic.',
+        excerpt: `Navigation apps can make travel faster and more convenient, but they can also redirect large amounts of traffic through quiet residential streets, creating congestion, noise, and safety concerns. The article describes how drivers use GPS systems to avoid delays, sometimes at the expense of neighborhoods that were never designed to handle heavy through-traffic. The result is a clash between individual convenience and community impact.`,
       },
       {
         label: 'Source B',
         citation: 'National Research Council. Understanding the Changing Planet (2010).',
-        excerpt: 'Discussion of web mapping and the benefits of geographic information systems.',
+        excerpt: `Web mapping and geographic information systems (GIS) let people visualize data, analyze spatial patterns, and solve problems more efficiently than static paper maps alone. These tools can help researchers, planners, businesses, and everyday users understand where things are and how places relate to one another. The book excerpt emphasizes that mapping technologies have expanded access to geographic knowledge and made it easier to share and interpret information.`,
       },
       {
         label: 'Source C',
         citation: 'He, Amy. “People Continue to Rely on Maps and Navigational Apps.” Insider Intelligence, 18 July 2019, www.emarketer.com/content/people-continue-to-rely-on-maps-and-navigational-apps-emarketer-forecasts-show.',
         excerpt: `The following is adapted from a graph published in an article forecasting market trends.
 
-Smartphone Map/Navigation App Users (US, 2017–2021)`,
+Smartphone Map/Navigation App Users (US, 2017–2021)
+The graph shows that map and navigation app use remains widespread and continues to shape how people travel and make decisions. The data suggest that these tools have become part of everyday life for many smartphone users, reflecting both convenience and increasing dependence on digital navigation.`,
         imageUrl: '/source-images/ap25-frq-english-language-set-2-page6.png',
         imageAlt: 'Source C graph from the AP 2025 Set 2 PDF',
       },
       {
         label: 'Source D',
         citation: 'Grabar, Henry. “Smartphones and the Uncertain Future of Spatial Thinking.” Bloomberg (2014).',
-        excerpt: 'Article excerpt about GPS navigation and spatial memory.',
+        excerpt: `Navigation apps and GPS tools can make travel feel effortless, but they may also weaken people’s ability to pay attention to landmarks, remember routes, and build mental maps of the places they move through. The article raises the possibility that if users outsource too much spatial thinking to digital devices, they may lose some of the cognitive habits that help people understand and navigate the world independently.`,
       },
       {
         label: 'Source E',
@@ -214,14 +254,15 @@ Digital content can be consumed from so many devices.
 People have smartphones, tablets, desktop computers, and laptops. You can even access content and apps from smart TVs, watches, smart home devices, and smart vehicles.
 But there are certain categories that are dominated with smartphone app usage. These are the top categories that people turn to their smartphones for.
 
-Smartphone App Usage`,
+Smartphone App Usage
+The chart suggests that mobile apps are woven into daily routines, with users relying on smartphones for navigation, communication, entertainment, shopping, and other common tasks. That level of dependence helps explain why map apps have become so influential—and why concerns about overreliance on them matter.`,
         imageUrl: '/source-images/ap25-frq-english-language-set-2-page6.png',
         imageAlt: 'Source E chart from the AP 2025 Set 2 PDF',
       },
       {
         label: 'Source F',
         citation: 'Paulas, Rick. “For the Good of Society—and Traffic!—Delete Your Map App.” Intelligencer (2017).',
-        excerpt: 'Article excerpt criticizing map apps and traffic effects.',
+        excerpt: `Map apps may solve a driver’s immediate problem, but critics argue that they can collectively create larger traffic problems by funneling cars into neighborhoods that are not intended to serve as bypass routes. The article warns that when routing software optimizes for the fastest path for individual users, the result can be congestion, frustration, and a decline in quality of life for residents.`,
       },
     ],
   },
@@ -291,26 +332,29 @@ It could be that newly sprouted blooms or subtle shifts in sunlight signaled the
         citation: '“National Historic Preservation Act.” National Park Service, U.S. Department of the Interior, 2 Dec. 2018, nps.gov/subjects/historicpreservation/national-historic-preservation-act.htm.',
         excerpt: `After World War II, the United States seemed poised at the edge of a limitless future, and its vision of progress was characterized by the sleek and the new. Urban renewal was seen as a way to clear out the slums, get rid of “obsolete” buildings, make space for an exploding population, and accommodate the burgeoning car culture. Wide swaths were demolished: entire blocks, neighborhoods, business districts, all razed to make way for the new. By the 1960s, urban renewal had altered the face of the nation’s cities.
 
-But out of this wholesale erasure of the old grew the most important law governing how we treat those places that define our past: the National Historic Preservation Act. It was the first national policy governing preservation and it would shape the fate of many of our historic and cultural sites over the next half-century.`,
+Out of that wholesale erasure of the old grew the National Historic Preservation Act. The law created a national preservation framework, helped establish the National Register of Historic Places, and made it possible for local, state, and federal agencies to identify and protect places that help tell the nation’s story. The act also reflects a broad idea that preservation is not just about buildings; it is about memory, identity, and the public value of keeping evidence of the past visible in the present.`,
       },
       {
         label: 'Source B',
         citation: 'Merlino, Kathryn Rogers. Building Reuse: Sustainability, Preservation, and the Value of Design. University of Washington Press, 2018.',
         excerpt: `In the United States, the recognition of value in buildings began with the identification and preservation of historical structures that had played an important part of the story of creating our nation. Historic designation usually takes into consideration national standards of significance set within specific boundaries: to be designated, a building must be proven to be associated with an important moment in local or national history, or with a historical individual or group, or must represent an exceptional architectural style or tradition.
 
-Of course, the question of what should be considered “significant” historical and cultural value in a building is often hotly debated by owners, historians, politicians, community groups, and other interested parties. When the terms of significance can’t be established or agreed upon, it becomes practically impossible to “officially” declare something historic—and suddenly, the building lacks “value.”`,
+Preservation, then, is not simply about saving old things because they are old. It depends on definitions, institutions, and agreements about what kinds of history deserve protection. Of course, the question of what should be considered “significant” historical and cultural value in a building is often hotly debated by owners, historians, politicians, community groups, and other interested parties. When the terms of significance can’t be established or agreed upon, it becomes practically impossible to “officially” declare something historic—and suddenly, the building lacks “value.”`,
       },
       {
         label: 'Source C',
         citation: 'Appelbaum, Binyamin. “When Historic Preservation Hurts Cities.” The New York Times, 26 Jan. 2020, nytimes.com/2020/01/26/opinion/historic-preservation-solar-panels.html.',
         excerpt: `I live in a historic neighborhood in the heart of Washington, D.C. It’s not historic in the sense that anything especially important happened here—certainly not in the modest rowhouses that make up the bulk of the neighborhood. What “historic” means, here and in cities across the country, is that this is a neighborhood where buildings are not supposed to change.
 
-The law says window frames on Capitol Hill must be wooden, or something that looks very much like wood. If a front door has two parts and opens down the middle, it cannot be replaced by a single door that swings open from the side. If the house was built two stories tall, it must remain two stories tall—unless the addition can’t be seen from the street.`,
+The law says window frames on Capitol Hill must be wooden, or something that looks very much like wood. If a front door has two parts and opens down the middle, it cannot be replaced by a single door that swings open from the side. If the house was built two stories tall, it must remain two stories tall—unless the addition can’t be seen from the street.
+
+Appelbaum’s point is that preservation rules can become so rigid that they prevent homeowners from making practical, energy-efficient, or affordable improvements. In his view, preservation can protect appearances while also making homes harder to adapt to modern needs, raising the question of whether all protected buildings deserve the same level of restriction.`,
       },
       {
         label: 'Source D',
         citation: 'Webb, Amy. “Building Relevance: What Are the Top Challenges Facing Preservation?” National Trust for Historic Preservation: Preservation Leadership Forum, 8 Oct. 2020, forum.savingplaces.org/blogs/amy-webb1/2020/10/08/survey-top-challenges-facing-preservation.',
-        excerpt: 'The following is based on a graph from a survey on preservation. The graph shows historic preservation professionals’ responses to the question “What are the top challenges to preserving historic places?”',
+        excerpt: `The following is based on a graph from a survey on preservation. The graph shows historic preservation professionals’ responses to the question “What are the top challenges to preserving historic places?” The results suggest that preservation work is shaped by practical problems as well as philosophical ones. Funding, awareness, maintenance, and community support all appear to matter, showing that preservation is often difficult not because people reject history, but because saving buildings requires sustained resources and public commitment.`,
+        note: 'This source is a graph in the official PDF packet.',
         imageUrl: '/source-images/ap24-frq-english-language-set-1-page6.png',
         imageAlt: 'Source D graph from the AP 2024 Set 1 PDF',
       },
@@ -321,12 +365,13 @@ The law says window frames on Capitol Hill must be wooden, or something that loo
 
 “We realized we’ve got to be organized and proactive to deal with the fact that only 3.7 percent of Harlem’s buildings are landmarked compared to 66 percent of Greenwich Village and 50 percent of the Upper West and Upper East sides.”
 
-“Preservation is people-centered. Although we’re using old things—old buildings, old stories—it’s really about leveraging the power of place to have a positive impact on people’s lives right now in the present moment,” Leggs adds.`,
+The article emphasizes that preservation is not only about architecture; it is also about cultural memory, equity, and who gets to decide which neighborhoods are worth protecting. “Preservation is people-centered. Although we’re using old things—old buildings, old stories—it’s really about leveraging the power of place to have a positive impact on people’s lives right now in the present moment,” Leggs adds.`,
       },
       {
         label: 'Source F',
         citation: 'Rosen, Ellis. “National Trust for Historic Preservation of Frank’s Chair.” New Yorker Collection, 3 Jan. 2022, condenaststore.com/featured/national-trust-for-historic-preservation-of-franks-chair-ellis-rosen.html.',
-        excerpt: 'The following is a cartoon from the collection of a weekly magazine of journalism and culture.',
+        excerpt: `The following is a cartoon from the collection of a weekly magazine of journalism and culture. The cartoon uses visual irony to suggest the tension between sentimental preservation and the realities of ownership, implying that historic designation can sometimes protect objects in ways that seem absurd or overly performative rather than meaningfully tied to public history.`,
+        note: 'This source is a cartoon in the official PDF packet.',
         imageUrl: '/source-images/ap24-frq-english-language-set-1-page9.png',
         imageAlt: 'Source F cartoon from the AP 2024 Set 1 PDF',
       },
@@ -397,36 +442,40 @@ They changed their names so I wouldn’t have to.`,
       {
         label: 'Source A',
         citation: 'Baker, Linda. “Food Trucks ‘Are No Longer a Novelty,’ but They Are Adapting.” New York Times (2019).',
-        excerpt: 'Article excerpt about food trucks, growth, regulation, and changing urban demand.',
+        excerpt: `Food trucks are no longer a novelty; they have become part of the urban dining landscape. As demand has grown, cities have responded with a patchwork of regulations meant to address where trucks may park, how long they may stay, and what permits or inspections they must obtain. Supporters of food trucks argue that mobile kitchens bring entrepreneurship, lower overhead costs, and more varied options to neighborhoods that may not be served well by traditional restaurants. Critics, however, worry about sanitation, congestion, and whether food trucks should face the same rules as brick-and-mortar businesses when they compete for the same customers.
+
+Some operators have adapted by focusing on premium ingredients, social media marketing, and event-based service, while others have struggled with the costs of compliance and the difficulty of finding legal places to operate.`,
       },
       {
         label: 'Source B',
         citation: 'City of New Orleans. Mobile food truck permit and license guide.',
-        excerpt: 'Permit rules and operating restrictions for mobile food trucks.',
+        excerpt: `Mobile food truck operators in New Orleans must obtain permits and licenses before operating. The rules cover issues such as health and sanitation, parking locations, business registration, and enforcement. The guide explains that trucks may face restrictions on where they can park, how they can dispose of waste, and when they can serve food. These requirements are intended to protect public health and reduce conflicts with traffic, pedestrians, and nearby businesses.`,
       },
       {
         label: 'Source C',
         citation: 'Hait, Andrew W. “Fast-Growing Food Truck Industry Can Operate Amid COVID-19 Social Distancing Rules.” U.S. Census Bureau (2020).',
-        excerpt: 'Graph showing the number of mobile food service establishments.',
+        excerpt: `The graph tracks the number of mobile food service establishments over time and shows strong growth in the industry. Despite temporary disruptions, the overall number of mobile food vendors rises, reflecting increased consumer demand, lower startup costs, and the flexibility of mobile models.`,
+        note: 'This source is a graph in the official PDF packet.',
         imageUrl: '/source-images/ap24-frq-english-language-set-2-page6.png',
         imageAlt: 'Source C graph from the AP 2024 Set 2 PDF',
       },
       {
         label: 'Source D',
         citation: 'Meehan, Sarah. “Challenges to Food-Truck Restrictions Cropping Up beyond Baltimore.” Baltimore Sun (2016).',
-        excerpt: 'Article excerpt about buffer rules, regulation, and how cities handle competition between food trucks and restaurants.',
+        excerpt: `Cities that regulate food trucks often impose buffer zones or other restrictions to protect restaurants from what they see as unfair competition. At the same time, overly strict rules can limit consumer choice and make it difficult for small operators to succeed. The article argues that cities must balance fairness, public safety, and the public’s interest in a vibrant and affordable food scene.`,
       },
       {
         label: 'Source E',
         citation: 'Neseman, Dale. “Full Service.” Advertiser-News South (2020).',
-        excerpt: 'Editorial cartoon about food truck regulations and restaurant-style service.',
+        excerpt: 'Editorial cartoon depicting the tensions between food trucks and brick-and-mortar restaurants, suggesting that mobile vendors are sometimes treated as if they were full-service competitors.',
+        note: 'This source is a cartoon in the official PDF packet.',
         imageUrl: '/source-images/ap24-frq-english-language-set-2-page9.png',
         imageAlt: 'Source E cartoon from the AP 2024 Set 2 PDF',
       },
       {
         label: 'Source F',
         citation: 'Weber, David. The Food Truck Handbook: Start, Grow, and Succeed in the Mobile Food Business (2012).',
-        excerpt: 'Book excerpt describing the future of food trucks and the benefits they can bring to cities.',
+        excerpt: `Food trucks can help cities by filling gaps in the restaurant market, creating opportunities for entrepreneurs, and bringing fresh energy to neighborhoods and events. Because they have lower overhead costs than traditional restaurants, they can test new menus and reach customers in flexible ways. The book excerpt presents mobile food service as a valuable complement to brick-and-mortar dining rather than a threat to it.`,
       },
     ],
   },
