@@ -219,59 +219,9 @@ function sophisticationSignals(text: string) {
   return counter || nuance
 }
 
-function localFallback(args: { type: QuestionType; essayText: string }): Evaluation {
-  const { type, essayText } = args
-  const words = essayText.trim().split(/\s+/).filter(Boolean).length
-  const thesis = hasDefensibleThesis(essayText) ? 1 : 0
-
-  const ev = evidenceSignals(essayText, type)
-  const evScoreRaw =
-    ev.sourceLabels * 0.9 + ev.quoteLike * 0.75 + ev.parenthetical * 0.25 + ev.examples * 0.15 + ev.rhetoricalTerms * 0.5
-  const lengthBonus = words >= 800 ? 0.15 : words >= 550 ? 0.1 : 0
-
-  let rowB = clamp(Math.round((evScoreRaw + lengthBonus) / 1.7), 0, 4)
-  if (words < 120) rowB = Math.min(rowB, 1)
-  if (words < 220) rowB = Math.min(rowB, 2)
-  if (words < 350) rowB = Math.min(rowB, 3)
-
-  const soph = sophisticationSignals(essayText) && words >= 220 ? 1 : 0
-
-  const rows: RubricRowScore[] =
-    type === 'rhetorical'
-      ? [
-          { label: 'Row A — Thesis (Rhetorical)', score: thesis, max: 1, note: thesis ? 'You make an arguable claim about the writer’s choices.' : 'Aim for a 1–2 sentence thesis that names choices + purpose/effect.' },
-          { label: 'Row B — Evidence & Commentary', score: rowB, max: 4, note: rowB >= 3 ? 'Evidence is specific and you explain how choices build meaning.' : 'Add more specific textual moments and explain how they support your claim.' },
-          { label: 'Row C — Sophistication', score: soph, max: 1, note: soph ? 'You add nuance (context, tension, or layered purpose).' : 'Push past “device spotting” by linking choices to situation + implications.' },
-        ]
-      : [
-          { label: 'Row A — Thesis', score: thesis, max: 1, note: thesis ? 'You take a defensible position.' : 'State a clear, defensible position (not a summary).' },
-          { label: 'Row B — Evidence & Commentary', score: rowB, max: 4, note: rowB >= 3 ? 'Evidence is specific and generally connected to claims.' : 'Use more specific evidence and explain how it supports each claim.' },
-          { label: 'Row C — Sophistication', score: soph, max: 1, note: soph ? 'You acknowledge complexity (counterargument or limits).' : 'Add a thoughtful concession, tension, or broader implication.' },
-        ]
-
-  const total = (rows[0]?.score ?? 0) + (rows[1]?.score ?? 0) + (rows[2]?.score ?? 0)
-  const strengths: string[] = []
-  if (thesis) strengths.push('Defensible thesis/position is present early.')
-  if (rowB >= 3) strengths.push('Specific evidence supports multiple claims.')
-  if (type === 'rhetorical' && ev.rhetoricalTerms >= 1) strengths.push('You identify relevant rhetorical choices.')
-  if (soph) strengths.push('You include complexity (tension, limits, or counterargument).')
-  if (strengths.length === 0) strengths.push('You have a starting draft — now aim for clarity + specificity.')
-
-  const growth: string[] = []
-  if (!thesis) growth.push('Write a sharper thesis (choice + purpose/effect OR stance + reason).')
-  if (rowB <= 2) growth.push('Add more specific evidence and explain the “so what” after each quote/example.')
-  if (!soph) growth.push('Add a concession or limitation and show why your position still holds.')
-
-  const nextSteps: string[] = [
-    type === 'synthesis'
-      ? 'Underline three moments where you used sources; add 1–2 sentences explaining how each supports a claim.'
-      : type === 'rhetorical'
-        ? 'Pick 2–3 choices (not 6). For each: quote → name choice → explain effect → tie back to purpose.'
-        : 'Add one paragraph that handles a counterargument and refines your position.',
-    'Revise topic sentences so each paragraph makes a claim (not a summary).',
-  ]
-
-  return { total, maxTotal: 6, rows, strengths, growth, nextSteps }
+function normalizeEvaluation(evaluation: Evaluation): Evaluation {
+  const total = evaluation.rows.reduce((acc, row) => acc + row.score, 0)
+  return { ...evaluation, total, gradingSource: 'ai' }
 }
 
 export async function gradeEssay(args: {
@@ -280,6 +230,8 @@ export async function gradeEssay(args: {
   essayText: string
 }): Promise<Evaluation> {
   const ai = await aiGradeEssay(args)
-  if (ai && typeof ai.total === 'number' && Array.isArray(ai.rows)) return { ...ai, gradingSource: 'ai' }
-  return { ...localFallback(args), gradingSource: 'local' }
+  if (ai && typeof ai.total === 'number' && Array.isArray(ai.rows)) {
+    return normalizeEvaluation(ai)
+  }
+  throw new Error('AI grading failed')
 }
