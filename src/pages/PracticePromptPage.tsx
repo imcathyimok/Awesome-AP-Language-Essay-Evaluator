@@ -278,14 +278,18 @@ export function PracticePromptPage() {
             />
 
             <div className="mt-3 flex items-center justify-between gap-3">
-              <div className="text-xs text-ink-700/75">Tip: Use 2–3 body paragraphs with clear topic sentences + “so what?” explanation after evidence.</div>
+              <div className="text-xs text-ink-700/75">
+                {busy
+                  ? 'AI is grading your essay now — this usually takes a few seconds.'
+                  : 'Tip: Use 2–3 body paragraphs with clear topic sentences + “so what?” explanation after evidence.'}
+              </div>
               <button
                 type="button"
                 disabled={busy || !essayText.trim()}
                 onClick={onSubmit}
                 className="marker-hover rounded-full border border-ink-900/15 bg-accent-yellow/45 px-5 py-2 text-sm font-bold text-ink-900 disabled:opacity-50"
               >
-                Submit for grading
+                {busy ? 'Grading…' : 'Submit for grading'}
               </button>
             </div>
           </SketchCard>
