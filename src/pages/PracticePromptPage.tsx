@@ -4,7 +4,7 @@ import { SketchCard } from '../components/SketchCard'
 import { promptById } from '../data/prompts'
 import { gradeEssay } from '../lib/grader'
 import { upsertSubmission } from '../lib/storage'
-import type { Evaluation, Submission } from '../types'
+import type { Submission } from '../types'
 
 function highlightWriteAnEssay(text: string) {
   const re = /(write an essay[^.]*\.)/i
@@ -79,24 +79,31 @@ export function PracticePromptPage() {
     setEssayText(await file.text())
   }
 
-  function onSubmit() {
+  async function onSubmit() {
     if (!essayText.trim()) return
     setBusy(true)
     setTimerRunning(false)
-    const evaluation: Evaluation = gradeEssay({ type: p.type, promptTitle: p.title, essayText })
-    const submission: Submission = {
-      id: crypto.randomUUID(),
-      createdAt: new Date().toISOString(),
-      promptId: p.id,
-      promptType: p.type,
-      promptTitle: p.title,
-      promptYear: p.source.year,
-      promptSet: p.source.set,
-      essayText,
-      evaluation,
+    try {
+      const evaluation = await gradeEssay({ type: p.type, promptTitle: p.title, essayText })
+      const submission: Submission = {
+        id: crypto.randomUUID(),
+        createdAt: new Date().toISOString(),
+        promptId: p.id,
+        promptType: p.type,
+        promptTitle: p.title,
+        promptYear: p.source.year,
+        promptSet: p.source.set,
+        essayText,
+        evaluation,
+      }
+      upsertSubmission(submission)
+      navigate(`/results/${submission.id}`)
+    } catch (error) {
+      console.error(error)
+      window.alert('AI grading is not available right now. Please check your API key and connection.')
+    } finally {
+      setBusy(false)
     }
-    upsertSubmission(submission)
-    navigate(`/results/${submission.id}`)
   }
 
   return (

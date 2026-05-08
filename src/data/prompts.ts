@@ -256,7 +256,7 @@ But there are certain categories that are dominated with smartphone app usage. T
 
 Smartphone App Usage
 The chart suggests that mobile apps are woven into daily routines, with users relying on smartphones for navigation, communication, entertainment, shopping, and other common tasks. That level of dependence helps explain why map apps have become so influential—and why concerns about overreliance on them matter.`,
-        imageUrl: '/source-images/ap25-frq-english-language-set-2-page6.png',
+        imageUrl: '/source-images/ap25-frq-english-language-set-2-page9.png',
         imageAlt: 'Source E chart from the AP 2025 Set 2 PDF',
       },
       {
@@ -757,7 +757,9 @@ Furthermore, the plants are derived from natural breeding programs with normal n
         label: 'Source F',
         citation: 'Despommier, Dickson D. The Vertical Farm: Feeding the World in the 21st Century (2010).',
         excerpt: 'Graphic source from the official PDF packet showing a conceptual model of vertical farming and arable land use.',
-        note: 'Screenshot should be placed in `public/source-images` and referenced here when available.',
+        note: 'Screenshot from the PDF page is shown below.',
+        imageUrl: '/source-images/ap23-frq-english-language-set-2-page10.png',
+        imageAlt: 'Source F graphic from the AP 2023 Set 2 PDF',
       },
     ],
   },

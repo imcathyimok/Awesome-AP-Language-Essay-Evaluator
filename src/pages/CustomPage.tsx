@@ -34,10 +34,10 @@ export function CustomPage() {
     setPromptText(text)
   }
 
-  function onEvaluate() {
+  async function onEvaluate() {
     if (!promptText.trim() || !essayText.trim()) return
 
-    const evaluation = gradeEssay({
+    const evaluation = await gradeEssay({
       type,
       promptTitle: 'Custom prompt',
       essayText,

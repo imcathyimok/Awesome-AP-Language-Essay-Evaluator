@@ -14,10 +14,13 @@ export function DashboardPage() {
 
   const recent = submissions[0] ?? null
   const totalCount = submissions.length
+  const validTotals = submissions
+    .map((s) => s.evaluation.total)
+    .filter((n): n is number => Number.isFinite(n))
   const avg =
-    totalCount === 0
+    validTotals.length === 0
       ? 0
-      : Math.round((submissions.reduce((acc, s) => acc + s.evaluation.total, 0) / totalCount) * 10) / 10
+      : Math.round((validTotals.reduce((acc, n) => acc + n, 0) / validTotals.length) * 10) / 10
 
   const labels = submissions
     .slice()
@@ -73,6 +76,14 @@ export function DashboardPage() {
             <div className="text-ink-700/70">/ 6</div>
           </div>
           <div className="mt-2 text-sm text-ink-700/80">{totalCount ? `${totalCount} total submissions` : 'Start with a prompt.'}</div>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <div className="rounded-full border border-emerald-500/30 bg-emerald-500/15 px-3 py-1.5 text-xs font-semibold text-emerald-900">
+              AI Scored
+            </div>
+            <div className="rounded-full border border-ink-900/15 bg-paper-50/70 px-3 py-1.5 text-xs font-medium text-ink-700">
+              Evaluated by claude-haiku-4-5
+            </div>
+          </div>
         </SketchCard>
 
         <SketchCard title="Practice mix" subtitle="How you’ve been practicing lately">
@@ -162,6 +173,9 @@ export function DashboardPage() {
               After each quote/example, write one sentence that explains how it proves your claim. That single move
               often upgrades Row B.
             </div>
+          </div>
+          <div className="mt-4 rounded-2xl border border-ink-900/10 bg-paper-50/70 px-4 py-3 text-sm text-ink-700/85">
+            Evaluated by <span className="font-semibold text-ink-900">claude-haiku-4-5</span>
           </div>
         </SketchCard>
       </div>

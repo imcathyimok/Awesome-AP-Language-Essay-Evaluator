@@ -44,6 +44,7 @@ export type Evaluation = {
   strengths: string[]
   growth: string[]
   nextSteps: string[]
+  gradingSource?: 'ai' | 'local'
 }
 
 export type Submission = {

@@ -24,12 +24,27 @@ export function ResultsPage() {
         title="Results card"
         subtitle={`${submission.promptYear} Set ${submission.promptSet} • ${submission.promptTitle}`}
         right={
-          <Link
-            to={`/practice/${submission.promptId}`}
-            className="marker-hover rounded-full border border-ink-900/15 bg-paper-50/70 px-3 py-1.5 text-sm font-medium text-ink-900"
-          >
-            Practice again
-          </Link>
+          <div className="flex items-center gap-2">
+            <div
+              className={
+                `rounded-full px-3 py-1.5 text-xs font-semibold uppercase tracking-wide ` +
+                (e.gradingSource === 'ai'
+                  ? 'border border-emerald-500/30 bg-emerald-500/15 text-emerald-900'
+                  : 'border border-amber-500/30 bg-amber-500/15 text-amber-900')
+              }
+            >
+              {e.gradingSource === 'ai' ? 'AI Scored' : 'Local Fallback'}
+            </div>
+            <div className="rounded-full border border-ink-900/15 bg-paper-50/70 px-3 py-1.5 text-xs font-medium text-ink-700">
+              Evaluated by claude-haiku-4-5
+            </div>
+            <Link
+              to={`/practice/${submission.promptId}`}
+              className="marker-hover rounded-full border border-ink-900/15 bg-paper-50/70 px-3 py-1.5 text-sm font-medium text-ink-900"
+            >
+              Practice again
+            </Link>
+          </div>
         }
       >
         <div className="flex flex-wrap items-end justify-between gap-4">
