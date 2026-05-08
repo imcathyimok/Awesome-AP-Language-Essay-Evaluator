@@ -1,4 +1,4 @@
-import type { Evaluation, QuestionType, RubricRowScore } from '../types'
+import type { Evaluation, QuestionType } from '../types'
 
 const AI_GRADER_SYSTEM_PROMPT = `System Prompt (English)
 You are a maximally strict AP English Language reader. Your task is to score student essays conservatively according to the official AP scoring guidelines (Row A: Thesis 0–1 point, Row B: Evidence & Commentary 0–4 points, Row C: Sophistication 0–1 point). The final score is the sum of the three rows, with a maximum of 6 points. When in doubt, score lower. Do not reward near-misses, generic commentary, partially developed claims, or broad but unsupported assertions. A response must clearly, repeatedly, and explicitly satisfy the rubric to earn a point.
@@ -85,9 +85,9 @@ function readEnv(name: string) {
   return (import.meta as unknown as { env?: Record<string, string | undefined> }).env?.[name]
 }
 
-async function aiGradeEssay(args: { type: QuestionType; promptTitle: string; essayText: string }): Promise<Evaluation | null> {
+async function aiGradeEssay(args: { type: QuestionType; promptTitle: string; essayText: string }): Promise<Evaluation> {
   const apiKey = readEnv('VITE_YINLI_API_KEY')
-  if (!apiKey) return null
+  if (!apiKey) throw new Error('Missing VITE_YINLI_API_KEY')
 
   const apiUrl = readEnv('VITE_YINLI_API_URL') ?? DEFAULT_API_URL
   const model = readEnv('VITE_YINLI_MODEL') ?? DEFAULT_MODEL
@@ -103,123 +103,47 @@ async function aiGradeEssay(args: { type: QuestionType; promptTitle: string; ess
     '{"total":0,"maxTotal":6,"rows":[{"label":"Row A — Thesis","score":0,"max":1,"note":""}],"strengths":[],"growth":[],"nextSteps":[]}',
   ].join('\n')
 
-  try {
-    const res = await fetch(apiUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        model,
-        messages: [
-          { role: 'system', content: AI_GRADER_SYSTEM_PROMPT },
-          { role: 'user', content: userPrompt },
-        ],
-        temperature: 0.2,
-      }),
-    })
+  const res = await fetch(apiUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${apiKey}`,
+    },
+    body: JSON.stringify({
+      model,
+      messages: [
+        { role: 'system', content: AI_GRADER_SYSTEM_PROMPT },
+        { role: 'user', content: userPrompt },
+      ],
+      temperature: 0.2,
+    }),
+  })
 
-    if (!res.ok) return null
-    const data = (await res.json()) as {
-      choices?: Array<{ message?: { content?: string } }>
-      output_text?: string
-      result?: unknown
-    }
-
-    const content = data.output_text ?? data.choices?.[0]?.message?.content
-    if (typeof content === 'string') {
-      const parsed = extractJson(content)
-      if (parsed) return parsed
-    }
-
-    if (data.result && typeof data.result === 'object') return data.result as Evaluation
-    return null
-  } catch {
-    return null
+  if (!res.ok) {
+    throw new Error(`AI grading failed with status ${res.status}`)
   }
-}
 
-function clamp(n: number, min: number, max: number) {
-  return Math.max(min, Math.min(max, n))
-}
+  const data = (await res.json()) as {
+    choices?: Array<{ message?: { content?: string } }>
+    output_text?: string
+    result?: unknown
+  }
 
-function countMatches(text: string, re: RegExp) {
-  const m = text.match(re)
-  return m ? m.length : 0
-}
+  const content = data.output_text ?? data.choices?.[0]?.message?.content
+  let evaluation: Evaluation | null = null
 
-function firstNonEmptyParagraph(text: string) {
-  return (
-    text
-      .split(/\n\s*\n/g)
-      .map((p) => p.trim())
-      .find(Boolean) ?? ''
-  )
-}
+  if (typeof content === 'string') {
+    evaluation = extractJson(content)
+  }
 
-function hasDefensibleThesis(text: string) {
-  const p1 = firstNonEmptyParagraph(text).toLowerCase()
-  if (p1.length < 12) return false
-  const stanceSignals = new RegExp(
-    [
-      'should',
-      'must',
-      'ought',
-      'need(?:s| to)?',
-      "can(?:not|'t)?",
-      'is (?:more|less|important|valuable|effective|helpful|harmful|problematic|valid|invalid)',
-      'should be',
-      'is not',
-      'does not',
-      'would',
-      'could',
-      'may',
-      'therefore',
-      'because',
-      'although',
-      'while',
-      'instead',
-      'however',
-      'in conversation with',
-      'not (?:just|only)',
-      'not merely',
-      'rather than',
-      'most important',
-      'least effective',
-      'best way',
-      'the key',
-      'the best',
-    ].join('|'),
-    'i',
-  )
-  return stanceSignals.test(p1)
-}
+  if (!evaluation && data.result && typeof data.result === 'object') {
+    evaluation = data.result as Evaluation
+  }
 
-function evidenceSignals(text: string, type: QuestionType) {
-  const t = text.toLowerCase()
-  const quoteLike = countMatches(text, /"[^"]{8,}"/g)
-  const parenthetical = countMatches(text, /\([^)]+\)/g)
-  const sourceLabels = countMatches(t, /\bsource\s*[a-f]\b/g)
-  const examples = countMatches(t, /\bfor example\b|\bfor instance\b|\bsuch as\b|\bconsider\b/g)
-  const rhetoricalTerms =
-    type === 'rhetorical'
-      ? countMatches(
-          t,
-          /\b(diction|syntax|imagery|metaphor|tone|appeal|ethos|pathos|logos|anecdote|parallel|juxtaposition|contrast|repetition|personification|allusion|rhetorical question|choice|purpose|effect)\b/g,
-        )
-      : 0
-  return { quoteLike, parenthetical, sourceLabels, examples, rhetoricalTerms }
-}
+  if (!evaluation) {
+    throw new Error('AI grading returned an unexpected response format')
+  }
 
-function sophisticationSignals(text: string) {
-  const t = text.toLowerCase()
-  const counter = /\b(although|while|however|on the other hand|nevertheless|yet|still|even so|at the same time|but|instead|rather than)\b/.test(t)
-  const nuance = /\b(limitation|trade-?off|complicate|tension|context|mixed|both\b|not always|not necessarily|depends|in some cases|conversation with|hard-won|tested|resilient|dialogue)\b/.test(t)
-  return counter || nuance
-}
-
-function normalizeEvaluation(evaluation: Evaluation): Evaluation {
   const total = evaluation.rows.reduce((acc, row) => acc + row.score, 0)
   return { ...evaluation, total, gradingSource: 'ai' }
 }
@@ -229,9 +153,5 @@ export async function gradeEssay(args: {
   promptTitle: string
   essayText: string
 }): Promise<Evaluation> {
-  const ai = await aiGradeEssay(args)
-  if (ai && typeof ai.total === 'number' && Array.isArray(ai.rows)) {
-    return normalizeEvaluation(ai)
-  }
-  throw new Error('AI grading failed')
+  return aiGradeEssay(args)
 }
